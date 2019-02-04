@@ -44,24 +44,17 @@
  </build>
   
   <distributionManagement>
-	<repository>
-		<id>deployment</id>
-		<name>Internal Releases</name>
-		<url>http://repo1.maven.org/maven2</url>
-		<!--<releases>
-			<updatePolicy>never</updatePolicy>
-		</releases>-->
-	</repository>
- 
 	<snapshotRepository>
 		<id>deployment</id>
 		<name>Internal Releases</name>
-		<url>http://repo1.maven.org/maven2</url>
-		<!--<snapshots>
-			<enabled>false</enabled>
-		</snapshots>-->
+		<url>http://localhost:8081/repository/maven-snapshots/</url>
 	</snapshotRepository>
 
+	<repository>
+		<id>deployment</id>
+		<name>Internal Releases</name>
+		<url>http://localhost:8081/repository/maven-releases/</url>
+	</repository>
 </distributionManagement>
   
 </project>

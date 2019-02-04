@@ -7,7 +7,7 @@ pipeline {
 
 
     stages {
-        stage('Build') {
+        /*stage('Build') {
             steps {
 		    echo 'Building...'
 		    sh '${mvnHome}/bin/mvn install'
@@ -34,6 +34,11 @@ pipeline {
 		    withSonarQubeEnv('SonarQube') {
 		    sh '${sonarqubeScannerHome}/bin/sonar-scanner'
 		  }
+            }
+        }*/
+        stage('Publish to Nexus') {
+            steps {
+		    echo 'Nexus...'
             }
         }
         stage('Deploy') {
