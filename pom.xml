@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">  <modelVersion>4.0.0</modelVersion>
   <groupId>org.jacoco</groupId>
   <artifactId>git-jacoco-example-maven</artifactId>
   <packaging>jar</packaging>
@@ -101,26 +99,27 @@
    </profile>
 </profiles>
   
-  <distributionManagement>
-	<snapshotRepository>
-		<id>nexus-snapshots</id>
-		<name>Internal Snapshots</name>
-		<url>http://localhost:8081/repository/maven-snapshots/</url>
-	</snapshotRepository>
+<distributionManagement>
+      <snapshotRepository>
+        <id>nexus-snapshots</id>
+        <name>Internal Snapshots</name>
+        <url>http://localhost:8081/repository/maven-snapshots/</url>
+      </snapshotRepository>
 
-	<repository>
-		<id>nexus-releases</id>
-		<name>Internal Releases</name>
-		<url>http://localhost:8081/repository/maven-releases/</url>
-	</repository>
+      <repository>
+	  <id>nexus-releases</id>
+	  <name>Internal Releases</name>
+	  <url>http://localhost:8081/repository/maven-releases/</url>
+      </repository>
 </distributionManagement>
 
 <scm>
-   <connection>scm:git:git@github.com:yuseffperry/Jacoco-Example.git</connection>
-   <url>scm:git:git@github.com:yuseffperry/Jacoco-Example.git</url>
-   <developerConnection>scm:git:git@github.com:yuseffperry/Jacoco-Example.git</developerConnection>
+  <connection>scm:git:git@github.com:yuseffperry/Jacoco-Example.git</connection>
+  <url>scm:git:git@github.com:yuseffperry/Jacoco-Example.git</url>
+  <developerConnection>scm:git:git@github.com:yuseffperry/Jacoco-Example.git</developerConnection>
 </scm>
 
+<!-- Local search for dependencies -->
 <!-- <repositories>
   <repository>
     <id>maven-group</id>

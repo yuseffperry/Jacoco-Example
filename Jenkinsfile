@@ -40,8 +40,8 @@ pipeline {
             steps {
 		    echo 'Nexus...'
 		    sh '${mvnHome}/bin/mvn clean deploy'
-		    sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=${releaseVersion} -DdevelopmentVersion=${developmentVersion}'
-		    //sh '${mvnHome}/bin/mvn release:clean'
+		    //sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=${releaseVersion} -DdevelopmentVersion=${developmentVersion}'
+		    sh '${mvnHome}/bin/mvn release:clean'
 		    //sh '${mvnHome}/bin/mvn release:prepare'
 		    //sh '${mvnHome}/bin/mvn release:perform'
             }
