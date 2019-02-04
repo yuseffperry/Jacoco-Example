@@ -40,9 +40,9 @@ pipeline {
             steps {
 		    echo 'Nexus...'
 		    sh '${mvnHome}/bin/mvn clean deploy -Dmaven.test.skip=true'
-		    //sh '${mvnHome}/bin/mvn release:clean'
-		    //sh '${mvnHome}/bin/mvn release:prepare'
-		    //sh '${mvnHome}/bin/mvn release:perform'
+		    sh '${mvnHome}/bin/mvn release:clean'
+		    sh '${mvnHome}/bin/mvn release:prepare'
+		    sh '${mvnHome}/bin/mvn release:perform'
             }
         }
         stage('Deploy') {
