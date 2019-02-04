@@ -40,7 +40,7 @@ pipeline {
             steps {
 		    echo 'Nexus...'
 		    sh '${mvnHome}/bin/mvn deploy'
-		    sh '${mvnHome}/bin/mvn release'
+		    sh '${mvnHome}/bin/mvn release:clean'
             }
         }
         stage('Deploy') {
