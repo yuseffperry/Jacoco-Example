@@ -17,11 +17,6 @@
       <artifactId>junit</artifactId>
       <version>4.12</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-source-plugin</artifactId>
-      <version>3.0.1</version>
-    </dependency>
   </dependencies>
 
  <build>
@@ -46,19 +41,34 @@
         </execution>
       </executions>
     </plugin>
-  <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-release-plugin</artifactId>
-    <version>2.5.3</version>
-    <configuration>
-      <!--
-        During release:perform, enable the "release" profile
-       -->
-      <tagNameFormat>v@{project.version}</tagNameFormat>
-      <autoVersionSubmodules>true</autoVersionSubmodules>
-      <releaseProfiles>release</releaseProfiles>
-    </configuration>
-  </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-release-plugin</artifactId>
+      <version>2.5.3</version>
+      <configuration>
+        <!--
+          During release:perform, enable the "release" profile
+         -->
+        <tagNameFormat>v@{project.version}</tagNameFormat>
+        <autoVersionSubmodules>true</autoVersionSubmodules>
+        <releaseProfiles>release</releaseProfiles>
+      </configuration>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-source-plugin</artifactId>
+      <version>3.0.1</version>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-javadoc-plugin</artifactId>
+      <version>3.0.1</version>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-javadoc-plugin</artifactId>
+      <version>3.0.1</version>
+    </plugin>
   </plugins>
  </build>
 
