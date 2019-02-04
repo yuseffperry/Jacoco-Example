@@ -41,7 +41,7 @@ pipeline {
 		    echo 'Nexus...'
 		    sh '${mvnHome}/bin/mvn clean deploy -Dmaven.test.skip=true'
 		    sh '${mvnHome}/bin/mvn release:clean'
-		    sh '${mvnHome}/bin/mvn release:prepare'
+		    sh '${mvnHome}/bin/mvn release:prepare -Darguments="-Dmaven.deploy.skip=true"'
 		    sh '${mvnHome}/bin/mvn release:perform'
             }
         }
