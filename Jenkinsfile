@@ -39,6 +39,7 @@ pipeline {
         stage('Publish to Nexus') {
             steps {
 		    echo 'Nexus...'
+		    sh '${mvnHome}/bin/mvn deploy'
             }
         }
         stage('Deploy') {
