@@ -1,7 +1,7 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.jacocotest</groupId>
-  <artifactId>jacocotest</artifactId>
+  <groupId>org.jacoco</groupId>
+  <artifactId>git-jacoco-example-maven</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
 
@@ -46,7 +46,7 @@
   <distributionManagement>
 	<snapshotRepository>
 		<id>deployment</id>
-		<name>Internal Releases</name>
+		<name>Internal Snapshots</name>
 		<url>http://localhost:8081/repository/maven-snapshots/</url>
 	</snapshotRepository>
 
