@@ -12,7 +12,7 @@ pipeline {
 		    echo 'Building...'
 		    sh '${mvnHome}/bin/mvn install'
             }
-        }
+        }*/
         stage('Test') {
             steps {
 		    echo 'Testing...'
@@ -28,7 +28,7 @@ pipeline {
 		   ])*/
             }
         }
-        stage('SonarQube Analysis') {
+        /*stage('SonarQube Analysis') {
             steps {
 		    echo 'SonarQube...'
 		    withSonarQubeEnv('SonarQube') {
