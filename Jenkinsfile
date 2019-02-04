@@ -41,6 +41,8 @@ pipeline {
 		    echo 'Nexus...'
 		    sh '${mvnHome}/bin/mvn deploy'
 		    sh '${mvnHome}/bin/mvn release:clean'
+		    sh '${mvnHome}/bin/mvn release:prepare'
+		    sh '${mvnHome}/bin/mvn release:perform'
             }
         }
         stage('Deploy') {
