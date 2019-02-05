@@ -43,7 +43,8 @@ pipeline {
 		    echo 'Nexus...'
 
             def pom = readMavenPom file: 'pom.xml'
-            def version = pom.version("-SNAPSHOT", "")
+            def version = pom.version.replace("-SNAPSHOT", "")
+            pom.version = version
 
             if (("${currentBuild.number}") == 'unspecified') {
                 version = "${pom.version}" + '0'
