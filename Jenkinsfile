@@ -10,7 +10,7 @@ pipeline {
         /*stage('Build') {
             steps {
 		    echo 'Building...'
-		    sh '${mvnHome}/bin/mvn install'
+		    sh '${mvnHome}/bin/mvn clean install -DskipTests'
             }
         }*/
         stage('Test') {
@@ -33,24 +33,37 @@ pipeline {
 		    echo 'SonarQube...'
 		    withSonarQubeEnv('SonarQube') {
 		    sh '${sonarqubeScannerHome}/bin/sonar-scanner'
-	        }
+	            }
             }
         }*/
         stage('Publish to Nexus') {
             steps {
 	        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jacocoexample-nexus-upload', usernameVariable: 'NEXUS_CREDENTIALS_USR', passwordVariable: 'NEXUS_CREDENTIALS_PSW']]) {
 		    echo 'Nexus...'
-		    sh '${mvnHome}/bin/mvn clean deploy'
-		    //sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=${releaseVersion} -DdevelopmentVersion=${developmentVersion}'
-		    sh '${mvnHome}/bin/mvn release:clean'
-		    sh '${mvnHome}/bin/mvn release:prepare'
+            def pom = readMavenPom file: 'pom.xml'
+            def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
+
+            sh "git clean -f && git reset --hard origin/master"
+
+            sh """
+                 mvn \
+                -DreleaseVersion=${version} \
+                -DdevelopmentVersion=${pom.version} \
+                -DpushChanges=false \
+                -DlocalCheckout=true \
+                -DpreparationGoals=initialize \
+                -Darguments="-DskipTests" \
+                release:prepare release:perform \
+                -B
+            """
+
+            sh "git push origin ${pom.artifactId}-${version}"
+		    //sh '${mvnHome}/bin/mvn clean deploy'
+ 		    //sh "${mvnHome}/bin/mvn -DreleaseVersion=${version} -DdevelopmentVersion=${pom.version} -DpushChanges=false -DlocalCheckout=true -DpreparationGoals=initialize release:prepare release:perform -B"
+		    //sh '${mvnHome}/bin/mvn release:clean'
+		    //sh '${mvnHome}/bin/mvn release:prepare'
 		    //sh '${mvnHome}/bin/mvn release:perform'
                 }
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying...'
             }
         }
     }
