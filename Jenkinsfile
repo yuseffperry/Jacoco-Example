@@ -36,28 +36,16 @@ pipeline {
 	            }
             }
         }*/
-        stage('Publish to Nexus') {
+        stage('Upload to Nexus') {
             steps {
                 script {
 	        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jacocoexample-nexus-upload', usernameVariable: 'NEXUS_CREDENTIALS_USR', passwordVariable: 'NEXUS_CREDENTIALS_PSW']]) {
 		    echo 'Nexus...'
 
+            sh 'sh ${mvnHome}/bin/mvn clean deploy'
+
             def pom = readMavenPom file: 'pom.xml'
-            def version = pom.version.replace("-SNAPSHOT", "")
-            pom.version = version
-
-            if (("${currentBuild.number}") == 'unspecified') {
-                version = "${pom.version}" + '1'
-            } else {
-                version = "${pom.version}" + "${currentBuild.number}"
-            }
-
-            if ("${pom.version}" + '-SNAPSHOT') {
-                url = "http://localhost:8081/repository/maven-snapshots/"
-                version = "${pom.version}" + '-SNAPSHOT'
-            } else {
-                url = "http://localhost:8081/repository/maven-releases/"
-            }
+            def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
 
             sh "git clean -f && git reset --hard origin/master"
 
