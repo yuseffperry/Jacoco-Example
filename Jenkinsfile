@@ -13,10 +13,10 @@ pipeline {
 		    sh '${mvnHome}/bin/mvn clean install -DskipTests'
             }
         }*/
-        stage('Test') {
+        /*stage('Test') {
             steps {
 		    echo 'Testing...'
-		    sh '${mvnHome}/bin/mvn clean jacoco:prepare-agent install jacoco:report'
+		    sh '${mvnHome}/bin/mvn clean jacoco:prepare-agent install jacoco:report'*/
 		    /*junit allowEmptyResults: true, testResults: 'target/test-results/test/*.xml'
 		    publishHTML([allowMissing: true,
 		      alwaysLinkToLastBuild: true,
@@ -26,8 +26,8 @@ pipeline {
 		      reportName: 'Jacoco Exmaple Test Results',
 		      reportTitles: ''
 		   ])*/
-            }
-        }
+           /* }
+        }*/
         /*stage('SonarQube Analysis') {
             steps {
 		    echo 'SonarQube...'
@@ -43,7 +43,7 @@ pipeline {
 		    echo 'Nexus...'
 
             def pom = readMavenPom file: 'pom.xml'
-            def version = pom.version("-SNAPSHOT")
+            def version = pom.version("-SNAPSHOT", "")
 
             if (("${currentBuild.number}") == 'unspecified') {
                 version = "${pom.version}" + '0'
