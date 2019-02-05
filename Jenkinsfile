@@ -43,7 +43,7 @@ pipeline {
 		    echo 'Nexus Snapshot...'
 
             //Deploys Snapshot to http://localhost:8081/repository/maven-snapshots/
-            sh 'sh ${mvnHome}/bin/mvn clean deploy'
+            sh '${mvnHome}/bin/mvn clean deploy'
 
             def pom = readMavenPom file: 'pom.xml'
             def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
@@ -57,16 +57,7 @@ pipeline {
 
             //sh '${mvnHome}/bin/mvn release:prepare'
 
-            sh """
-                ${mvnHome}/bin/mvn \
-                -DreleaseVersion=${version} \
-                -DdevelopmentVersion=${pom.version} \
-                -DpushChanges=false \
-                -DlocalCheckout=true \
-                -DpreparationGoals=initialize \
-                -Darguments="-DskipTests" \
-                release:prepare
-            """
+            sh '${mvnHome}/bin/mvn -DreleaseVersion=${version} -DdevelopmentVersion=${pom.version} -DpushChanges=false -DlocalCheckout=true -DpreparationGoals=initialize -Darguments="-DskipTests" release:prepare'
                     }
                 }
             }
