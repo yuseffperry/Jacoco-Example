@@ -45,7 +45,7 @@ pipeline {
             def pom = readMavenPom file: 'pom.xml'
             def version = pom.version("-SNAPSHOT")
 
-            if ("${currentBuild.number}") == 'unspecified') {
+            if (("${currentBuild.number}") == 'unspecified') {
                 version = pom.version('0')
             } else {
                 version = pom.version("${currentBuild.number}")
