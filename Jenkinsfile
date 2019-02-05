@@ -41,8 +41,22 @@ pipeline {
                 script {
 	        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jacocoexample-nexus-upload', usernameVariable: 'NEXUS_CREDENTIALS_USR', passwordVariable: 'NEXUS_CREDENTIALS_PSW']]) {
 		    echo 'Nexus...'
+
             def pom = readMavenPom file: 'pom.xml'
-            def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
+            def version = pom.version("-SNAPSHOT")
+
+            if ("${currentBuild.number}") == 'unspecified') {
+                version = pom.version('0')
+            } else {
+                version = pom.version("${currentBuild.number}")
+            }
+
+            if (version = pom.version("-SNAPSHOT")) {
+                url = "http://localhost:8081/repository/maven-snapshots/"
+                version = pom.version("-SNAPSHOT")
+            } else {
+                url = "http://localhost:8081/repository/maven-releases/"
+            }
 
             sh "git clean -f && git reset --hard origin/master"
 
