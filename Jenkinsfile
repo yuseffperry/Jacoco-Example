@@ -54,7 +54,7 @@ pipeline {
                 -DlocalCheckout=true \
                 -DpreparationGoals=initialize \
                 -Darguments="-DskipTests" \
-                release:prepare release:perform \
+                release:prepare \
                 -B
             """
 
