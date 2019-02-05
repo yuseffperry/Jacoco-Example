@@ -37,9 +37,9 @@ pipeline {
             }
         }*/
         stage('Publish to Nexus') {
-            node {
-            //steps {
-	        //withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jacocoexample-nexus-upload', usernameVariable: 'NEXUS_CREDENTIALS_USR', passwordVariable: 'NEXUS_CREDENTIALS_PSW']]) {
+            steps {
+                script {
+	        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jacocoexample-nexus-upload', usernameVariable: 'NEXUS_CREDENTIALS_USR', passwordVariable: 'NEXUS_CREDENTIALS_PSW']]) {
 		    echo 'Nexus...'
             def pom = readMavenPom file: 'pom.xml'
             def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
@@ -64,7 +64,8 @@ pipeline {
 		    //sh '${mvnHome}/bin/mvn release:clean'
 		    //sh '${mvnHome}/bin/mvn release:prepare'
 		    //sh '${mvnHome}/bin/mvn release:perform'
-               // }
+                    }
+                }
             }
         }
     }
