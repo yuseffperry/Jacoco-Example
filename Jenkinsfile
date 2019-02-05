@@ -33,17 +33,19 @@ pipeline {
 		    echo 'SonarQube...'
 		    withSonarQubeEnv('SonarQube') {
 		    sh '${sonarqubeScannerHome}/bin/sonar-scanner'
-		  }
+	        }
             }
         }*/
         stage('Publish to Nexus') {
             steps {
+	        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jacocoexample-nexus-upload', usernameVariable: 'NEXUS_CREDENTIALS_USR', passwordVariable: 'NEXUS_CREDENTIALS_PSW']]) {
 		    echo 'Nexus...'
 		    sh '${mvnHome}/bin/mvn clean deploy'
 		    //sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=${releaseVersion} -DdevelopmentVersion=${developmentVersion}'
 		    sh '${mvnHome}/bin/mvn release:clean'
 		    sh '${mvnHome}/bin/mvn release:prepare -DignoreSnapshots=true'
 		    //sh '${mvnHome}/bin/mvn release:perform'
+                }
             }
         }
         stage('Deploy') {

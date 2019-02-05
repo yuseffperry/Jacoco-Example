@@ -113,13 +113,6 @@
         </repository>
   </distributionManagement>
 
-  <scm>
-    <url>https://github.com/yuseffperry/Jacoco-Example</url>
-    <connection>scm:git:git@github.com:yuseffperry/Jacoco-Example.git</connection>
-    <developerConnection>scm:git:git@github.com:yuseffperry/Jacoco-Example.git</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
-
   <!-- Local search for dependencies -->
   <repositories>
     <repository>
