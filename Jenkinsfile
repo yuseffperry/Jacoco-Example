@@ -46,14 +46,14 @@ pipeline {
             def version = pom.version("-SNAPSHOT")
 
             if (("${currentBuild.number}") == 'unspecified') {
-                version = pom.version('0')
+                version = "${pom.version}" + '0'
             } else {
-                version = pom.version("${currentBuild.number}")
+                version = "${pom.version}" + "${currentBuild.number}"
             }
 
-            if (pom.version("-SNAPSHOT")) {
+            if ("${pom.version}" + '-SNAPSHOT') {
                 url = "http://localhost:8081/repository/maven-snapshots/"
-                version = pom.version("-SNAPSHOT")
+                version = "${pom.version}" + '-SNAPSHOT'
             } else {
                 url = "http://localhost:8081/repository/maven-releases/"
             }
