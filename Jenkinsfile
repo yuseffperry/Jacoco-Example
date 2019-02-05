@@ -57,7 +57,16 @@ pipeline {
 
             //sh '${mvnHome}/bin/mvn release:prepare'
 
-            sh '${mvnHome}/bin/mvn -DreleaseVersion=${version} -DdevelopmentVersion=${pom.version} -DpushChanges=false -DlocalCheckout=true -DpreparationGoals=initialize -Darguments="-DskipTests" release:prepare'
+            sh """
+                ${mvnHome}/bin/mvn \
+                -DreleaseVersion=${version} \
+                -DdevelopmentVersion=${pom.version} \
+                -DpushChanges=false \
+                -DlocalCheckout=true \
+                -DpreparationGoals=initialize \
+                -Darguments="-DskipTests" \
+                release:prepare
+            """
                     }
                 }
             }
