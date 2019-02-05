@@ -58,7 +58,7 @@ pipeline {
             //sh '${mvnHome}/bin/mvn release:prepare'
 
             sh """
-                ${mvnHome}/bin/mvn \
+                mvn \
                 -DreleaseVersion=${version} \
                 -DdevelopmentVersion=${pom.version} \
                 -DpushChanges=false \
