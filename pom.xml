@@ -114,8 +114,7 @@
   </distributionManagement>
 
   <scm>
-    <url>https://github.com/yuseffperry/Jacoco-Example.git</url>
-    <connection>scm:git:https://${env.NEXUS_CREDENTIALS_USR}:${env.NEXUS_CREDENTIALS_PSW}@github.com:yuseffperry/Jacoco-Example.git</connection>
+    <connection>scm:git:git@github.com:yuseffperry/Jacoco-Example.git</connection>
     <tag>HEAD</tag>
   </scm>
 
