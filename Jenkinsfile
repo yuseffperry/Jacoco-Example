@@ -36,16 +36,22 @@ pipeline {
 	            }
             }
         }*/
-        stage('Upload to Nexus') {
+        stage('Upload Snapshot to Nexus') {
             steps {
-                script {
+            script {
 	        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jacocoexample-nexus-upload', usernameVariable: 'NEXUS_CREDENTIALS_USR', passwordVariable: 'NEXUS_CREDENTIALS_PSW']]) {
-		    echo 'Nexus...'
+		    echo 'Nexus Snapshot...'
 
+            //Deploys Snapshot to http://localhost:8081/repository/maven-snapshots/
             sh 'sh ${mvnHome}/bin/mvn clean deploy'
 
             def pom = readMavenPom file: 'pom.xml'
             def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
+
+           /*
+            * Clean any locally modified files and ensure we are actually on origin/master
+            * as a failed release could leave the local workspace ahead of origin/master
+            */
 
             sh "git clean -f && git reset --hard origin/master"
 
@@ -60,6 +66,15 @@ pipeline {
                 release:prepare \
                 -B
             """
+                    }
+                }
+            }
+        }   
+        stage('Upload Release to Nexus') {
+            steps {
+            input 'Upload Release?'
+
+            echo 'Nexus Release...'
 
             sh "git push origin ${pom.artifactId}-${version}"
 		    //sh '${mvnHome}/bin/mvn clean deploy'
@@ -67,8 +82,6 @@ pipeline {
 		    //sh '${mvnHome}/bin/mvn release:clean'
 		    //sh '${mvnHome}/bin/mvn release:prepare'
 		    //sh '${mvnHome}/bin/mvn release:perform'
-                    }
-                }
             }
         }
     }
