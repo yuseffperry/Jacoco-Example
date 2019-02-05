@@ -115,7 +115,8 @@
   </distributionManagement>
 
   <scm>
-    <connection>scm:git:git@github.com:yuseffperry/Jacoco-Example.git</connection>
+    <connection>scm:git:https://github.com/yuseffperry/Jacoco-Example.git</connection>
+    <url>https://github.com/yuseffperry/Jacoco-Example</url>
   </scm>
 
   <!-- Local search for dependencies -->
