@@ -51,7 +51,7 @@ pipeline {
                 version = pom.version("${currentBuild.number}")
             }
 
-            if (version = pom.version("-SNAPSHOT")) {
+            if (pom.version("-SNAPSHOT")) {
                 url = "http://localhost:8081/repository/maven-snapshots/"
                 version = pom.version("-SNAPSHOT")
             } else {
