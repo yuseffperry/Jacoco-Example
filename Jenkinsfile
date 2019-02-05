@@ -47,7 +47,7 @@ pipeline {
             pom.version = version
 
             if (("${currentBuild.number}") == 'unspecified') {
-                version = "${pom.version}" + '0'
+                version = "${pom.version}" + '1'
             } else {
                 version = "${pom.version}" + "${currentBuild.number}"
             }
