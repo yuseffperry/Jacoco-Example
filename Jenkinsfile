@@ -55,11 +55,10 @@ pipeline {
 
             sh "git clean -f && git reset --hard origin/master"
 
-            sh '${mvnHome}/bin/mvn release:prepare'
+            //sh '${mvnHome}/bin/mvn release:prepare'
 
-            /*
             sh """
-                mvn \
+                ${mvnHome}/bin/mvn \
                 -DreleaseVersion=${version} \
                 -DdevelopmentVersion=${pom.version} \
                 -DpushChanges=false \
@@ -68,7 +67,6 @@ pipeline {
                 -Darguments="-DskipTests" \
                 release:prepare
             """
-            */
                     }
                 }
             }
@@ -81,8 +79,7 @@ pipeline {
 
             sh "git push origin ${pom.artifactId}-${version}"
 		    //sh '${mvnHome}/bin/mvn clean deploy'
- 		    //sh "${mvnHome}/bin/mvn -DreleaseVersion=${version} -DdevelopmentVersion=${pom.version} -DpushChanges=false -DlocalCheckout=true -DpreparationGoals=initialize release:prepare release:perform -B"
-		    //sh '${mvnHome}/bin/mvn release:clean'
+ 		    //sh '${mvnHome}/bin/mvn release:clean'
 		    //sh '${mvnHome}/bin/mvn release:prepare'
 		    //sh '${mvnHome}/bin/mvn release:perform'
             }
