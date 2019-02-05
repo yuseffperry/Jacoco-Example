@@ -43,7 +43,7 @@ pipeline {
 		    echo 'Nexus Snapshot...'
 
             //Deploys Snapshot to http://localhost:8081/repository/maven-snapshots/
-            sh '${mvnHome}/bin/mvn clean deploy'
+            sh '${mvnHome}/bin/mvn deploy'
 
             def pom = readMavenPom file: 'pom.xml'
             def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
