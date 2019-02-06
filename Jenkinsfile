@@ -30,16 +30,16 @@ pipeline {
         stage('Upload Snapshot to Nexus') {
             steps {
             script {
-	        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jacocoexample-nexus-upload', usernameVariable: 'NEXUS_CREDENTIALS_USR', passwordVariable: 'NEXUS_CREDENTIALS_PSW']]) {
+	       // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jacocoexample-nexus-upload', usernameVariable: 'NEXUS_CREDENTIALS_USR', passwordVariable: 'NEXUS_CREDENTIALS_PSW']]) {
 		    echo 'Nexus Snapshot...'
     
 		    //sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=1.0.0 -DdevelopmentVersion=1.0.1'
 
-            sh '${mvnHome}/bin/mvn release:clean release:update-versions'
+            sh '${mvnHome}/bin/mvn release:update-versions'
 
             //Deploys Snapshot to http://localhost:8081/repository/maven-snapshots/
-            sh '${mvnHome}/bin/mvn deploy'
-                    }
+            sh '${mvnHome}/bin/mvn clean deploy'
+                   // }
                 }
             }
         }   
