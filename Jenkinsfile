@@ -37,7 +37,7 @@ pipeline {
 
             sh '${mvnHome}/bin/mvn release:update-versions'
             //sh '${mvnHome}/bin/mvn release:prepare'
-            sh "git push origin master"
+            sh "git push git@github.com:yuseffperry/Jacoco-Example.git"
             
 
             //Deploys Snapshot to http://localhost:8081/repository/maven-snapshots/
