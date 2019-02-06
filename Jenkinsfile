@@ -38,7 +38,7 @@ pipeline {
             sh '${mvnHome}/bin/mvn release:update-versions'
 
             //Deploys Snapshot to http://localhost:8081/repository/maven-snapshots/
-            sh '${mvnHome}/bin/mvn clean deploy'
+            sh '${mvnHome}/bin/mvn deploy'
                     }
                 }
             }
