@@ -19,14 +19,14 @@ pipeline {
 		    sh '${mvnHome}/bin/mvn clean jacoco:prepare-agent install jacoco:report'
             }
         }
-        /*stage('SonarQube Analysis') {
+        stage('SonarQube Analysis') {
             steps {
 		    echo 'SonarQube...'
 		    withSonarQubeEnv('SonarQube') {
 		    sh '${sonarqubeScannerHome}/bin/sonar-scanner'
 	            }
             }
-        }*/
+        }
         stage('Upload Snapshot to Nexus') {
             steps {
             script {
