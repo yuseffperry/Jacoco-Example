@@ -42,15 +42,8 @@ pipeline {
 
             //sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform'
 
-            //Used with versions-maven-plugin in pom.xml
-            sh """
-                ${mvnHome}/bin/mvn build-helper:parse-version versions:set \
-                -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} \
-                versions:commit
-            """
-
             //Deploys Snapshot to http://localhost:8081/repository/maven-snapshots/
-            sh '${mvnHome}/bin/mvn clean deploy'
+            sh '${mvnHome}/bin/mvn deploy'
                     }
                 }
             }

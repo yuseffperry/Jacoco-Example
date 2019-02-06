@@ -37,6 +37,7 @@
           </execution>
         </executions>
         <configuration>
+        <!-- Sends Deploy to nexus-releases when prepare is active -->
           <serverId>nexus-releases</serverId>
           <nexusUrl>http://localhost:8081/</nexusUrl>
           <skipStaging>true</skipStaging>
@@ -111,13 +112,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-install-plugin</artifactId>
         <version>2.5.2</version>
-      </plugin>
-
-      <!-- Added for version testing using mvn build-helper:parse-version in Jenkinsfile -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>versions-maven-plugin</artifactId>
-        <version>2.7</version>
       </plugin>
 
     </plugins>
