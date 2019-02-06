@@ -36,9 +36,7 @@ pipeline {
 		    //sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=1.0.0 -DdevelopmentVersion=1.0.1'
 
             sh '${mvnHome}/bin/mvn release:update-versions'
-            //sh '${mvnHome}/bin/mvn release:prepare'
-            sh "git push git@github.com:yuseffperry/Jacoco-Example.git"
-            
+            sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform'
 
             //Deploys Snapshot to http://localhost:8081/repository/maven-snapshots/
             sh '${mvnHome}/bin/mvn clean deploy'
