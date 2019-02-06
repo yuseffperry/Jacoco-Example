@@ -37,7 +37,7 @@ pipeline {
             sh '${mvnHome}/bin/mvn clean deploy -Dmaven.test.skip=true'
 		    //sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=1.0.0 -DdevelopmentVersion=1.0.1'
 
-            sh '${mvnHome}/bin/mvn -B release:update-versions'
+            sh '${mvnHome}/bin/mvn release:update-versions'
                     }
                 }
             }
