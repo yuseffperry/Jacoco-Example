@@ -20,7 +20,7 @@
 
 <profiles>
   <profile>
-    <id>releases</id>
+    <id>snapshots</id>
     <build>
       <plugins>
       <plugin>
@@ -38,7 +38,7 @@
         </executions>
         <configuration>
         <!-- Sends Deploy to nexus-releases when prepare is active -->
-          <serverId>nexus-releases</serverId>
+          <serverId>nexus-snapshots</serverId>
           <nexusUrl>http://localhost:8081/</nexusUrl>
           <skipStaging>true</skipStaging>
         </configuration>
@@ -80,7 +80,7 @@
         <configuration>
           <tagNameFormat>@{project.version}-SNAPSHOT</tagNameFormat>
           <autoVersionSubmodules>true</autoVersionSubmodules>
-          <releaseProfiles>releases</releaseProfiles>
+          <releaseProfiles>snapshots</releaseProfiles>
         </configuration>
       </plugin>
 
