@@ -3,7 +3,7 @@
   <groupId>org.examples.maven</groupId>
   <artifactId>git-jacoco-example-maven</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -130,7 +130,7 @@
 
   <scm>
     <connection>scm:git:git@github.com:yuseffperry/Jacoco-Example-Maven.git</connection>
-    <tag>HEAD</tag>
+    <tag>1.0.1-SNAPSHOT</tag>
   </scm>
 
   <!-- Local search for dependencies -->
