@@ -37,6 +37,7 @@ pipeline {
             //Hardcoded for testing. Works perfectly along with mvn clean deploy.
 		    //sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=1.0.0 -DdevelopmentVersion=1.0.1'
 
+            //Fails but pushes to Nexus releases no problem with release:clean, prepare, and perform
             //sh '${mvnHome}/bin/mvn release:update-versions'
 
             //sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform'
