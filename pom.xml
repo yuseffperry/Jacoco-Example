@@ -80,6 +80,9 @@
           <tagNameFormat>@{project.version}</tagNameFormat>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <releaseProfiles>releases</releaseProfiles>
+          <checkModificationExcludes>
+            <checkModificationExclude>pom.xml</checkModificationExclude>
+          </checkModificationExcludes>
         </configuration>
       </plugin>
 
