@@ -35,31 +35,9 @@ pipeline {
 
             //Deploys Snapshot to http://localhost:8081/repository/maven-snapshots/
             sh '${mvnHome}/bin/mvn clean deploy -Dmaven.test.skip=true'
-            //sh '${mvnHome}/bin/mvn release:clean'
-		    sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=1.0.0 -DdevelopmentVersion=1.0.1'
+		    //sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=1.0.0 -DdevelopmentVersion=1.0.1'
 
-            //def pom = readMavenPom file: 'pom.xml'
-            //def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
-
-           /*
-            * Clean any locally modified files and ensure we are actually on origin/master
-            * as a failed release could leave the local workspace ahead of origin/master
-            */
-
-            //sh "git clean -f && git reset --hard origin/master"
-
-            //sh '${mvnHome}/bin/mvn release:prepare'
-
-            /*sh """
-                mvn \
-                -DreleaseVersion=${version} \
-                -DdevelopmentVersion=${pom.version} \
-                -DpushChanges=false \
-                -DlocalCheckout=true \
-                -DpreparationGoals=initialize \
-                -Darguments="-DskipTests" \
-                release:prepare release:perform
-            """*/
+            sh '${mvnHome}/bin/mvn -B release:update-versions'
                     }
                 }
             }
