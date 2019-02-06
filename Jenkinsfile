@@ -36,7 +36,7 @@ pipeline {
             //Deploys Snapshot to http://localhost:8081/repository/maven-snapshots/
             sh '${mvnHome}/bin/mvn clean deploy -Dmaven.test.skip=true'
             //sh '${mvnHome}/bin/mvn release:clean'
-		    //sh '${mvnHome}/bin/mvn release:prepare release:perform -DreleaseVersion=${releaseVersion} -DdevelopmentVersion=${developmentVersion}'
+		    sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=${releaseVersion} -DdevelopmentVersion=${developmentVersion}'
 
             //def pom = readMavenPom file: 'pom.xml'
             //def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
