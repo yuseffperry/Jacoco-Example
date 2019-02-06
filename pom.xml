@@ -3,7 +3,7 @@
   <groupId>org.examples.maven</groupId>
   <artifactId>git-jacoco-example-maven</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0</version>
+  <version>1.0.0-SNAPSHOT</version>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -78,12 +78,9 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>2.5.3</version>
         <configuration>
-          <tagNameFormat>@{project.version}</tagNameFormat>
+          <tagNameFormat>@{project.version}-SNAPSHOT</tagNameFormat>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <releaseProfiles>releases</releaseProfiles>
-          <checkModificationExcludes>
-            <checkModificationExclude>pom.xml</checkModificationExclude>
-          </checkModificationExcludes>
         </configuration>
       </plugin>
 
@@ -132,9 +129,7 @@
   </distributionManagement>
 
   <scm>
-    <connection>scm:git:C:\Users\yperry\.jenkins\workspace\JacocoExampleMaven.git</connection>
-    <url>https://github.com/yuseffperry/Jacoco-Example</url>
-    <tag>1.0.0</tag>
+    <connection>scm:git:git@github.com:yuseffperry/Jacoco-Example-Maven.git</connection>
   </scm>
 
   <!-- Local search for dependencies -->
