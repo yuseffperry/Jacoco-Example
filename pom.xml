@@ -99,11 +99,17 @@
     <connection>scm:git:git@github.com:yuseffperry/Jacoco-Example-Maven.git</connection>
   </scm>
 
-  <!-- Must be present in <mirrors> as well located at ..maven/conf/settings.xml. -->
+  <!-- Present here or in <mirrors> located at ..maven/conf/settings.xml. -->
+  <!-- First will try to download from local repo. If not present, will download from maven's repository -->
   <repositories>
     <repository>
       <id>maven-central</id>
       <url>http://localhost:8081/repository/maven-central/</url>
+    </repository>
+
+    <repository>
+      <id>maven-repository</id>
+      <url>http://central.maven.org/maven2/</url>
     </repository>
   </repositories>
   
