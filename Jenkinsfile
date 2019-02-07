@@ -13,15 +13,15 @@ pipeline {
         stage('Build') {
             steps {
 		    echo 'Building...'
-            //Deletes the target directory and installs a new target directory to the local repo. -DskipTests, skips tests.
+            //Deletes the target directory and installs a new target directory to the local repo with includes the classes, test-classes, jar etc. -DskipTests, skips tests. To do jacoco tests along with install, remove -DskipTests and delete the test stage.
 		    sh '${mvnHome}/bin/mvn clean install -DskipTests'
             }
         }
         stage('Test') {
             steps {
 		    echo 'Testing...'
-            //Uses jacoco-maven-plugin. Uses .../target/jacoco.exec made during '${mvnHome}/bin/mvn clean install -DskipTests' to create test report.
-		    sh '${mvnHome}/bin/mvn clean jacoco:prepare-agent install jacoco:report'
+            //Uses jacoco-maven-plugin. Adds to target directory created during '${mvnHome}/bin/mvn clean install -DskipTests' to make test report. Additions include site, surefire-reports, and jacoco.exec.
+		    sh '${mvnHome}/bin/mvn jacoco:prepare-agent install jacoco:report'
             }
         }
         stage('SonarQube Analysis') {
