@@ -115,8 +115,8 @@
           <tagNameFormat>@{project.version}</tagNameFormat>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <releaseProfiles>releases</releaseProfiles>
-        </configuration>
-      </plugin> -->
+        </configuration>-->
+      </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
