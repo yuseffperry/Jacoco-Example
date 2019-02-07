@@ -48,17 +48,15 @@ pipeline {
                 }
             }
         }   
-        /*stage('Upload Release to Nexus') {
+        stage('Upload Release to Nexus') {
             steps {
             input 'Upload Release?'
 
             echo 'Nexus Release...'
-
-            sh "git push origin ${pom.artifactId}-${version}"
  		    //sh '${mvnHome}/bin/mvn release:clean'
-		    //sh '${mvnHome}/bin/mvn release:prepare'
-		    //sh '${mvnHome}/bin/mvn release:perform'
+		    sh '${mvnHome}/bin/mvn release:prepare'
+		    sh '${mvnHome}/bin/mvn release:perform'
             }
-        }*/
+        }
     }
 }
