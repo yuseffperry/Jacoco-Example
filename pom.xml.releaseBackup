@@ -3,7 +3,7 @@
   <groupId>org.examples.maven</groupId>
   <artifactId>git-jacoco-example-maven</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.3-SNAPSHOT</version>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -20,7 +20,7 @@
 
 <profiles>
   <profile>
-    <id>releases</id>
+    <id>snapshots</id>
     <build>
       <plugins>
       <plugin>
@@ -38,7 +38,7 @@
         </executions>
         <configuration>
         <!-- Sends Deploy to nexus-releases when prepare is active -->
-          <serverId>nexus-releases</serverId>
+          <serverId>nexus-snapshots</serverId>
           <nexusUrl>http://localhost:8081/</nexusUrl>
           <skipStaging>true</skipStaging>
         </configuration>
@@ -73,15 +73,14 @@
         </executions>
       </plugin>
 
-      <!-- This plugin is used to release a project with Maven -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
         <version>2.5.3</version>
         <configuration>
-          <tagNameFormat>@{project.version}</tagNameFormat>
+          <tagNameFormat>@{project.version}-SNAPSHOT</tagNameFormat>
           <autoVersionSubmodules>true</autoVersionSubmodules>
-          <releaseProfiles>releases</releaseProfiles>
+          <releaseProfiles>snapshots</releaseProfiles>
         </configuration>
       </plugin>
 
@@ -102,7 +101,7 @@
         <artifactId>maven-deploy-plugin</artifactId>
         <version>2.8.2</version>
         <configuration>
-          <skip>false</skip><!-- Changed to false because of [INFO] - maven-deploy-plugin:2.8.2:deploy (default-deploy) @ git-jacoco-example-maven - [INFO] Skipping artifact deployment -->
+          <skip>true</skip><!-- Changed to false because of [INFO] - maven-deploy-plugin:2.8.2:deploy (default-deploy) @ git-jacoco-example-maven - [INFO] Skipping artifact deployment -->
         </configuration>
       </plugin>
 
@@ -131,6 +130,7 @@
 
   <scm>
     <connection>scm:git:git@github.com:yuseffperry/Jacoco-Example-Maven.git</connection>
+    <tag>HEAD</tag>
   </scm>
 
   <!-- Local search for dependencies -->
