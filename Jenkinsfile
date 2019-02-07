@@ -58,10 +58,10 @@ pipeline {
 		    //sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=1.0.0 -DdevelopmentVersion=1.0.1'
 
             //Deletes pom.xml.releaseBackup and release.properties files.
-            //sh '${mvnHome}/bin/mvn release:clean'
+            sh '${mvnHome}/bin/mvn release:clean'
 
             //Prepare for a release in SCM. Checks to see if local and remote files are in sync as well. They must be in sync or this command will not work (i.e. 'https://github.com': Everything up-to-date)
-		    sh '${mvnHome}/bin/mvn release:prepare'
+		    sh '${mvnHome}/bin/mvn release:prepare -DdryRun=true'
             //Grabs release from SCM (i.e. https://github.com/.../.../releases) made from '${mvnHome}/bin/mvn release:prepare', and uploads it to nexus-releases: http://localhost:8081/repository/maven-releases/ if it is not already present. If file with the same version is present, then it will not work.
 		    sh '${mvnHome}/bin/mvn release:perform'
             }
