@@ -18,7 +18,7 @@
     </dependency>
   </dependencies>
 
-<profiles>
+<!-- <profiles>
   <profile>
     <id>releases</id>
     <build>
@@ -36,9 +36,9 @@
             </goals>
           </execution>
         </executions>
-        <configuration>
+        <configuration> -->
         <!-- Sends Deploy to nexus-releases when prepare is active -->
-          <serverId>nexus-releases</serverId>
+         <!--> <serverId>nexus-releases</serverId>
           <nexusUrl>http://localhost:8081/</nexusUrl>
           <skipStaging>true</skipStaging>
         </configuration>
@@ -64,9 +64,9 @@
             </goals>
           </execution>
         </executions>
-        <configuration>
+        <configuration> -->
         <!-- Sends Deploy to nexus-snapshots when prepare is active -->
-          <serverId>nexus-snapshots</serverId>
+         <!-- <serverId>nexus-snapshots</serverId>
           <nexusUrl>http://localhost:8081/</nexusUrl>
           <skipStaging>true</skipStaging>
         </configuration>
@@ -74,7 +74,7 @@
       </plugins>
     </build>
   </profile>
-</profiles>
+</profiles> -->
 
   <build>
     <plugins>
@@ -110,13 +110,13 @@
           <tagNameFormat>@{project.version}-SNAPSHOT</tagNameFormat>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <releaseProfiles>snapshots</releaseProfiles>
-        </configuration> -->
+        </configuration>
        <configuration>
           <tagNameFormat>@{project.version}</tagNameFormat>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <releaseProfiles>releases</releaseProfiles>
         </configuration>
-      </plugin>
+      </plugin> -->
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
