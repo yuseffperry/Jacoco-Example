@@ -3,7 +3,7 @@
   <groupId>org.examples.maven</groupId>
   <artifactId>git-jacoco-example-maven</artifactId>
   <packaging>jar</packaging>
-  <version>10.0.0</version>
+  <version>10.0.1-SNAPSHOT</version>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -97,7 +97,7 @@
 
   <scm>
     <connection>scm:git:git@github.com:yuseffperry/Jacoco-Example-Maven.git</connection>
-    <tag>10.0.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <!-- Present here or in <mirrors> located at ..maven/conf/settings.xml. -->
