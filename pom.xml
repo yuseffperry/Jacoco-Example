@@ -3,7 +3,7 @@
   <groupId>org.examples.maven</groupId>
   <artifactId>git-jacoco-example-maven</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0</version>
+  <version>1.0.0-SNAPSHOT</version>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -69,6 +69,7 @@
         <configuration>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <tagNameFormat>@{project.version}</tagNameFormat>
+          <releaseVersion>2.0.0</releaseVersion>
           <developmentVersion>${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.0-SNAPSHOT</developmentVersion>
         </configuration>
       </plugin>
@@ -117,7 +118,6 @@
 
   <scm>
     <connection>scm:git:git@github.com:yuseffperry/Jacoco-Example-Maven.git</connection>
-    <tag>1.0.0</tag>
   </scm>
 
   <!-- Present here or in <mirrors> located at ..maven/conf/settings.xml. -->
