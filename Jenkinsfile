@@ -44,8 +44,6 @@ pipeline {
 	        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jacocoexample-nexus-upload', usernameVariable: 'NEXUS_CREDENTIALS_USR', passwordVariable: 'NEXUS_CREDENTIALS_PSW']]) {
 		    echo 'Nexus Snapshot...'
 
-            //def pom = readMavenPom file: 'pom.xml'
-
             //Deploys Snapshot to http://localhost:8081/repository/maven-snapshots/
             sh '${mvnHome}/bin/mvn deploy'
 
@@ -66,7 +64,7 @@ pipeline {
             script{
             input 'Upload Release to Nexus?'
             echo 'Nexus Release...'
-            
+
            /*
             * Clean any locally modified files and ensure we are actually on origin/master
             * as a failed release could leave the local workspace ahead of origin/master
@@ -88,6 +86,15 @@ pipeline {
             * -plugin. Additionally - use -DpushChanges=false to stop push to git repo.
             */
             sh '${mvnHome}/bin/mvn initialize release:prepare release:perform'
+
+            //Commit version changes to GitHub using git commit command. "Checkout to specific local branch" in the "Additional Behaviors" section to set the "Branch name" to master as well.
+            sh "mvn build-helper:parse-version versions:set -DnewVersion=\\\${parsedVersion.nextMajorVersion}.0.${env.BUILD_NUMBER}-SNAPSHOT versions:commit"
+
+            //Commit version changes to GitHub using git commit command. "Checkout to specific local branch" in the "Additional Behaviors" section to set the "Branch name" to master as well.
+            sh "git commit -am 'SNAPSHOT Update from Jenkins, the project has been successfully released :)'" 
+
+            //For now, push code back to git repository (This may need to stay in local)
+            sh "git push -u origin master"
                 }
             }
         }
