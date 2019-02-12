@@ -45,6 +45,13 @@ pipeline {
 
             //Deploys Snapshot to http://localhost:8081/repository/maven-snapshots/
             sh '${mvnHome}/bin/mvn deploy'
+
+            //Change minor version
+            sh """
+                mvn build-helper:parse-version versions:set \
+                -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.${env.BUILD_NUMBER} \
+                versions:commit
+            """
                     }
                 }
             }

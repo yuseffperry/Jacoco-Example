@@ -71,7 +71,7 @@
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <useReleaseProfile>false</useReleaseProfile>
           <!-- Once release is complete it will change version for next snapshots -->
-          <developmentVersion>${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.${env.BUILD_NUMBER}-SNAPSHOT</developmentVersion>
+          <developmentVersion>${parsedVersion.nextMajorVersion}.0.${env.BUILD_NUMBER}-SNAPSHOT</developmentVersion>
         </configuration>
       </plugin>
 
