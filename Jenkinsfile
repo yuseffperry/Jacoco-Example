@@ -52,7 +52,7 @@ pipeline {
             sh "mvn build-helper:parse-version versions:set -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.nextMinorVersion}.${env.BUILD_NUMBER}-SNAPSHOT versions:commit"
 
             //Commit version changes to GitHub using git commit command. "Checkout to specific local branch" in the "Additional Behaviors" section to set the "Branch name" to master as well.
-            git commit -am "SNAPSHOT Update from Jenkins" 
+            sh "git commit -am 'SNAPSHOT Update from Jenkins'" 
                     }
                 }
             }
