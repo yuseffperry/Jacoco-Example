@@ -43,11 +43,13 @@ pipeline {
             //Updates versions, could be useful if we go this route: https://stackoverflow.com/questions/53098369/shell-command-to-update-pom-file-from-a-variable/53099850#53099850
             //sh '${mvnHome}/bin/mvn release:update-versions'
 
+            def pom = readMavenPom file: 'pom.xml'
+
             //Deploys Snapshot to http://localhost:8081/repository/maven-snapshots/
             sh '${mvnHome}/bin/mvn deploy'
 
             //Change minor version
-            sh '${mvnHome}/bin/mvn build-helper:parse-version versions:set -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.nextMinorVersion}.${env.BUILD_NUMBER}-SNAPSHOT versions:commit'
+            sh '${mvnHome}/bin/mvn build-helper:parse-version versions:set -DnewVersion=${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.${env.BUILD_NUMBER}-SNAPSHOT versions:commit'
                     }
                 }
             }
