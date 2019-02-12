@@ -72,7 +72,7 @@ pipeline {
             * Prepare for a release in SCM. Checks to see if local and remote files are in sync as well.
 		    * They must be in sync or this command will not work (i.e. 'https://github.com': Everything up-to-date)
             */
-            sh """mvn \
+            sh """mvn build-helper:parse-version versions:set \
                 -DreleaseVersion=${version} \
                 -DdevelopmentVersion=${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.${currentBuild.number}-SNAPSHOT \
                 -DpushChanges=false \
