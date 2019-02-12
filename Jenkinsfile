@@ -47,7 +47,7 @@ pipeline {
             sh '${mvnHome}/bin/mvn deploy'
 
             //Change minor version
-            sh '${mvnHome}/bin/mvn build-helper:parse-version versions:set -DnewVersion=${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.${env.BUILD_NUMBER}-SNAPSHOT versions:commit'
+            sh '${mvnHome}/bin/mvn build-helper:parse-version versions:set -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.nextMinorVersion}.${env.BUILD_NUMBER}-SNAPSHOT versions:commit'
                     }
                 }
             }
