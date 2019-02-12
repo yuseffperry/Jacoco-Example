@@ -67,10 +67,11 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>2.5.3</version>
         <configuration>
-          <tagNameFormat>v2@{project.version}</tagNameFormat>
+          <tagNameFormat>v2-@{project.version}</tagNameFormat>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <useReleaseProfile>false</useReleaseProfile>
-          <developmentVersion>${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.0-SNAPSHOT</developmentVersion>
+          <!-- Once release is complete it will change version for next snapshots -->
+          <developmentVersion>${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.${currentBuild.number}-SNAPSHOT</developmentVersion>
         </configuration>
       </plugin>
 
