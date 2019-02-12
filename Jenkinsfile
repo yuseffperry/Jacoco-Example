@@ -74,7 +74,8 @@ pipeline {
             */
             sh """mvn build-helper:parse-version versions:set \
                 -DreleaseVersion=${version} \
-                -DdevelopmentVersion=${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.${currentBuild.number}-SNAPSHOT \
+                -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.\${currentBuild.number}-SNAPSHOT \
+                versions:commit \
                 -DpushChanges=false \
                 -DlocalCheckout=true \
                 -DpreparationGoals=initialize \
