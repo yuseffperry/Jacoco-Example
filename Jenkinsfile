@@ -51,19 +51,55 @@ pipeline {
         }   
         stage('Upload Release to Nexus') {
             steps {
+            script{
             input 'Upload Release to Nexus?'
 
             echo 'Nexus Release...'
+
+           /*
+            * Clean any locally modified files and ensure we are actually on origin/master
+            * as a failed release could leave the local workspace ahead of origin/master
+            */
+            def pom = readMavenPom file: 'pom.xml'
+            def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
+
+            sh "git clean -f && git reset --hard origin/master"
+
             //Deletes pom.xml.releaseBackup and release.properties files.
             sh '${mvnHome}/bin/mvn release:clean'
 
+           /*
+            * Prepare for a release in SCM. Checks to see if local and remote files are in sync as well.
+		    * They must be in sync or this command will not work (i.e. 'https://github.com': Everything up-to-date)
+            */
+            sh """mvn \
+                -DreleaseVersion=${version} \
+                -DdevelopmentVersion=${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.${currentBuild.number}-SNAPSHOT \
+                -DpushChanges=false \
+                -DlocalCheckout=true \
+                -DpreparationGoals=initialize \
+                -Darguments="-DskipTests" \
+                release:prepare
+            """
+
+           /*
+            * Grabs release from SCM (i.e. https://github.com/.../.../releases) made from '${mvnHome}/bin/mvn release:prepare',
+		    * and uploads it to nexus-releases: http://localhost:8081/repository/maven-releases/ if it is not already present.
+            * If file with the same version is present, then it will not work.
+            */
+            sh '${mvnHome}/bin/mvn release:perform'
+
+            //Push release
+            sh "git push origin ${pom.artifactId}-${version}"
+
             //Hardcoded for versioning for testing purposes.
-		    sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=1.0.0 -DdevelopmentVersion=1.0.1'
+		    //sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=1.0.0 -DdevelopmentVersion=1.0.1'
 
             //Prepare for a release in SCM. Checks to see if local and remote files are in sync as well. They must be in sync or this command will not work (i.e. 'https://github.com': Everything up-to-date)
 		    //sh '${mvnHome}/bin/mvn release:prepare -DdryRun=true'
             //Grabs release from SCM (i.e. https://github.com/.../.../releases) made from '${mvnHome}/bin/mvn release:prepare', and uploads it to nexus-releases: http://localhost:8081/repository/maven-releases/ if it is not already present. If file with the same version is present, then it will not work.
-		    sh '${mvnHome}/bin/mvn release:perform'
+		    //sh '${mvnHome}/bin/mvn release:perform'
+                }
             }
         }
     }
