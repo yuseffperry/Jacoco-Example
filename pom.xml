@@ -68,6 +68,9 @@
         <version>2.5.3</version>
         <configuration>
           <tagNameFormat>@{project.version}</tagNameFormat>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <useReleaseProfile>false</useReleaseProfile>
+          <developmentVersion>${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.${currentBuild.number}-SNAPSHOT</developmentVersion>
         </configuration>
       </plugin>
 

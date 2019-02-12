@@ -72,9 +72,11 @@ pipeline {
             * Prepare for a release in SCM. Checks to see if local and remote files are in sync as well.
 		    * They must be in sync or this command will not work (i.e. 'https://github.com': Everything up-to-date)
             */
+
+            /*
             sh """mvn build-helper:parse-version versions:set \
                 -DreleaseVersion=${version} \
-                -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.\${currentBuild.number}-SNAPSHOT \
+                -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.${currentBuild.number}-SNAPSHOT \
                 versions:commit \
                 -DpushChanges=false \
                 -DlocalCheckout=true \
@@ -82,13 +84,13 @@ pipeline {
                 -Darguments="-DskipTests" \
                 release:prepare
             """
-
+            */
            /*
             * Grabs release from SCM (i.e. https://github.com/.../.../releases) made from '${mvnHome}/bin/mvn release:prepare',
 		    * and uploads it to nexus-releases: http://localhost:8081/repository/maven-releases/ if it is not already present.
             * If file with the same version is present, then it will not work.
             */
-            sh '${mvnHome}/bin/mvn release:perform'
+            sh '${mvnHome}/bin/mvn release:prepare release:perform'
 
             //Push release
             sh "git push origin ${pom.artifactId}-${version}"
