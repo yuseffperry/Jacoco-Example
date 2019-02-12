@@ -90,7 +90,7 @@ pipeline {
 		    * and uploads it to nexus-releases: http://localhost:8081/repository/maven-releases/ if it is not already present.
             * If file with the same version is present, then it will not work.
             */
-            sh '${mvnHome}/bin/mvn release:prepare release:perform'
+            sh '${mvnHome}/bin/mvn initialize release:prepare release:perform'
 
             //Push release
             sh "git push origin ${pom.artifactId}-${version}"
