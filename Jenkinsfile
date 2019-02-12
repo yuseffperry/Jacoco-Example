@@ -93,7 +93,7 @@ pipeline {
             sh '${mvnHome}/bin/mvn initialize release:prepare release:perform'
 
             //Push release
-            sh "git push origin ${pom.artifactId}-${version}"
+            //sh "git push origin ${pom.artifactId}-${version}"
 
             //Hardcoded for versioning for testing purposes.
 		    //sh '${mvnHome}/bin/mvn release:clean release:prepare release:perform -DreleaseVersion=1.0.0 -DdevelopmentVersion=1.0.1'
