@@ -48,11 +48,14 @@ pipeline {
             //Deploys Snapshot to http://localhost:8081/repository/maven-snapshots/
             sh '${mvnHome}/bin/mvn deploy'
 
-            //Change minor version
+            //Change minor version (Reference: https://stackoverflow.com/questions/51126046/jenkins-can-parsedversion-property-be-used-in-pipeline-script)
             sh "mvn build-helper:parse-version versions:set -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.nextMinorVersion}.${env.BUILD_NUMBER}-SNAPSHOT versions:commit"
 
+            sh "ls -la"
+            sh "pwd"
+
             //Commit version changes to GitHub using git commit command. "Checkout to specific local branch" in the "Additional Behaviors" section to set the "Branch name" to master as well.
-            sh "git commit -am 'SNAPSHOT Update from Jenkins'" 
+            //sh "git commit -am 'SNAPSHOT Update from Jenkins'" 
                     }
                 }
             }
