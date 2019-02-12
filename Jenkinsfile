@@ -55,7 +55,9 @@ pipeline {
             sh "pwd"
 
             //Commit version changes to GitHub using git commit command. "Checkout to specific local branch" in the "Additional Behaviors" section to set the "Branch name" to master as well.
-            //sh "git commit -am 'SNAPSHOT Update from Jenkins'" 
+            sh "git commit -am 'SNAPSHOT Update from Jenkins'" 
+
+            sh "git push -u origin master"
                     }
                 }
             }
