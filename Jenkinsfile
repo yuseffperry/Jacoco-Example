@@ -10,7 +10,7 @@ pipeline {
 
 
     stages {
-        stage('Build') {
+        /*stage('Build') {
             steps {
 		    echo 'Building...'
             //Deletes the target directory and installs a new target directory to the local repo with includes the classes, test-classes, jar etc. -DskipTests, skips tests. To do jacoco tests along with install, remove -DskipTests and delete the test stage.
@@ -33,7 +33,7 @@ pipeline {
 		    sh '${sonarqubeScannerHome}/bin/sonar-scanner'
 	            }
             }
-        }
+        }*/
         stage('Upload Snapshot to Nexus') {
             steps {
             script {
@@ -47,11 +47,7 @@ pipeline {
             sh '${mvnHome}/bin/mvn deploy'
 
             //Change minor version
-            sh """
-                mvn build-helper:parse-version versions:set \
-                -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.${env.BUILD_NUMBER} \
-                versions:commit
-            """
+            sh '${mvnHome}/bin/mvn build-helper:parse-version versions:set -DnewVersion=${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.${env.BUILD_NUMBER}-SNAPSHOT versions:commit'
                     }
                 }
             }
