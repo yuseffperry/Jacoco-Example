@@ -3,7 +3,7 @@
   <groupId>org.examples.maven</groupId>
   <artifactId>git-jacoco-example-maven</artifactId>
   <packaging>jar</packaging>
-  <version>6.0.163-SNAPSHOT</version>
+  <version>6.1.165-SNAPSHOT</version>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
